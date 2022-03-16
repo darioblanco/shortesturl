@@ -1,0 +1,10 @@
+# The redis transaction can be tested with mocking but it is already covered in integration tests,
+# even for the retry case (see repeated url scenario when running tests in parallel). Therefore, a
+# minimum coverage of 98 is more than sufficient
+threshold: 98
+thresholdType: stmt
+order: desc
+sort: block
+root: 'github.com/darioblanco/shortesturl'
+exclusions:
+  # Place files that are TEMPORARILY ignored below this line
