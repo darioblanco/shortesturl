@@ -41,11 +41,11 @@ init-godeps:
 			set -x ; go install "$$2" ; set +x ;\
 		fi \
 	} ;\
-	$(if $(PRODUCTION),true,false) || godep air github.com/cosmtrek/air@latest ;\
-	$(if $(PRODUCTION),true,false) || godep goverreport github.com/mcubik/goverreport@latest ;\
-	godep swag github.com/swaggo/swag/cmd/swag@latest ;\
+	$(if $(PRODUCTION),true,false) || godep air github.com/cosmtrek/air ;\
+	$(if $(PRODUCTION),true,false) || godep goverreport github.com/mcubik/goverreport ;\
+	godep swag github.com/swaggo/swag/cmd/swag ;\
 
-install: init build ## install the dependencies
+install: init ## install the dependencies
 	go install ./cmd/server/main.go
 
 gen: ## generate swagger documentation

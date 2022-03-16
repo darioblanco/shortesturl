@@ -29,8 +29,6 @@ jobs:
       uses: actions/checkout@v2
     - name: Install Go dependencies
       run: make install
-    - name: Build Go code
-      run: make build
     - name: Test Go code
       run: make test
   draft-release:
