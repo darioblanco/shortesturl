@@ -3,7 +3,7 @@ SHELL := /usr/bin/env bash
 MAKEFLAGS += --no-builtin-rules
 MAKEFLAGS += --no-builtin-variables
 
-.PHONY: all benchmark build coverage format help init init-deps init-godeps gen run run-hmr test
+.PHONY: all benchmark build coverage format help init init-deps init-godeps install gen run run-hmr test
 
 all: init help
 
@@ -44,6 +44,9 @@ init-godeps:
 	$(if $(PRODUCTION),true,false) || godep air github.com/cosmtrek/air@latest ;\
 	$(if $(PRODUCTION),true,false) || godep goverreport github.com/mcubik/goverreport@latest ;\
 	godep swag github.com/swaggo/swag/cmd/swag@latest ;\
+
+install: init build ## install the dependencies
+	go install ./cmd/server/main.go
 
 gen: ## generate swagger documentation
 	swag init -d app/internal/http -g docs.go -o docs
