@@ -1,0 +1,41 @@
+version: '3.8'
+
+networks:
+  dev:
+    driver: bridge
+
+services:
+  redis:
+    image: redis:6-alpine
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 6379:6379
+    networks:
+      - dev
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 1s
+      timeout: 1s
+      retries: 15
+    container_name: shortesturl-redis
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: shortesturl:1.0
+    environment:
+      - SHORTESTURL_ENVIRONMENT=test
+      - SHORTESTURL_HTTP_HOST=0.0.0.0
+      - SHORTESTURL_REDIS_HOST=redis
+    expose:
+      - 3000
+    networks:
+      - dev
+    ports:
+      - 3000:3000
+    container_name: shortesturl-server
+    depends_on:
+      redis:
+        condition: service_healthy

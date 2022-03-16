@@ -1,0 +1,9 @@
+environment: dev
+httpHost: localhost
+httpPort: 3000
+httpScheme: http
+redisHost: localhost
+redisPort: 6379
+urlLength: 6
+urlExpirationInHours: 0
+version: unknown

@@ -1,0 +1,22 @@
+@baseUrl = http://localhost:3000
+
+### Health
+GET {{baseUrl}}/health HTTP/1.1
+
+### Encode
+POST {{baseUrl}}/encode HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "url": "https://github.com/darioblanco"
+}
+
+### Decode
+POST {{baseUrl}}/decode HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "url": "http://localhost:3000/64fc5e"
+}
