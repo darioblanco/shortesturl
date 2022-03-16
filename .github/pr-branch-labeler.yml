@@ -1,0 +1,29 @@
+build:
+  head: 'build/*'
+
+chore:
+  head: 'chore/*'
+
+ci:
+  head: 'ci/*'
+
+docs:
+  head: 'docs/*'
+
+feat:
+  head: ['feat/*', 'feature/*']
+
+fix:
+  head: ['fix/*', 'bug/*']
+
+perf:
+  head: ['perf/*', 'performance/*']
+
+refactor:
+  head: 'refactor/*'
+
+style:
+  head: 'style/*'
+
+test:
+  head: 'test/*'

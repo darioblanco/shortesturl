@@ -1,0 +1,48 @@
+name: Go
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/go.yml
+    - '**.go'
+    - Dockerfile
+    - go.mod
+    - go.sum
+    - Makefile
+  pull_request:
+    paths:
+    - .github/workflows/go.yml
+    - '**.go'
+    - Dockerfile
+    - go.mod
+    - go.sum
+    - Makefile
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Go
+      uses: actions/setup-go@v2
+    - name: Checkout current git repository
+      uses: actions/checkout@v2
+    - name: Install Go dependencies
+      run: make install
+    - name: Build Go code
+      run: make build
+    - name: Test Go code
+      run: make test
+  draft-release:
+    if: github.ref == 'refs/heads/main'
+    needs:
+    - test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create release draft
+      id: release-wizard
+      uses: darioblanco/release-wizard@main
+      with:
+        draft: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        withV: true

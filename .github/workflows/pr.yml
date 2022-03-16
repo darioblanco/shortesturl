@@ -1,0 +1,24 @@
+name: PR
+"on":
+  pull_request:
+    types:
+    - opened
+    - edited
+    - ready_for_review
+    - reopened
+    - synchronize
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Label PR based on branch name
+      if: github.event.action == 'opened'
+      uses: ffittschen/pr-branch-labeler@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Label PR based on pushed file paths
+      uses: actions/labeler@v3
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        configuration-path: .github/pr-path-labeler.yml
+        sync-labels: false
